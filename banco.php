@@ -8,5 +8,5 @@ $dsn = "Driver={SQL Server};Server=$dbhost;Port=1433;Database=$db;";
 $connect = odbc_connect($dsn,
 						$user,
 						$password);
-$query=("SELECT * FROM Professor");
+
 ?>
