@@ -10,13 +10,13 @@ session_start();
 <body>
 <div class="container">
 	<section id="content">
-		<form action="logado.php" method="post">
+		<form action="banco.php" method="post">
 			<h1>Login</h1>
 			<div>
 				<input type="text" placeholder="Username" required id="username" name="username"/>
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required id="password" />
+				<input type="password" placeholder="Password" required id="password" name="password" />
 			</div>
 			<div>
 				<input type="submit" value="Logar" />
