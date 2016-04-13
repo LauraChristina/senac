@@ -15,14 +15,16 @@ if(isset($_POST['username'])){
 
 	$query =("SELECT codProfessor, nome, tipo FROM professor WHERE email='$usuario' AND senha=HASHBYTES('SHA1', '$senha');");
 	$consulta = odbc_exec($connect,$query);
-	$resultado = odbc_fetch_row($consulta);
-	if($resultado > 0){
-		echo 'ok';
-		$resultado2 = odbc_fetch_array($consulta);
-		$_SESSION['codProfessor'] = $resultado2['codProfessor'];
-		$_SESSION['tipoProfessor'] = $resultado2['nome'];
-		$_SESSION['nomeProfessor'] = $resultado2['tipo'];
+	$resultado = odbc_fetch_array($consulta);
+	
+	
+	if(count($resultado) > 1){
+		
+		$_SESSION['codProfessor'] = $resultado['codProfessor'];
+		$_SESSION['tipoProfessor'] = $resultado['tipo'];
+		$_SESSION['nomeProfessor'] = $resultado['nome'];
 		header('Location: http://localhost/test/senac/logado.php');
+		
 	}
 	else {
 		$erroLogin="Login ou senha inválidos!";
@@ -41,15 +43,15 @@ if(isset($_POST['username'])){
 		<form action="Login2.php" method="post">
 			<h1>Login</h1>
 			<div>
-				<input type="text" placeholder="Username" required id="username" name="username"/>
+				<input type="text" placeholder="Email" required id="username" name="username"/>
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required id="password" name="password" />
+				<input type="password" placeholder="Senha" required id="password" name="password" />
 			</div>
 			<div>
 				<input type="submit" value="Logar" />
 			</div>
-            <div>
+            <div id="erro">
             	<?php 
 				if(isset ($erroLogin)){
 				echo $erroLogin;
